@@ -48,13 +48,13 @@ with open('coin_qoutes.json', 'w') as json_file:
     json.dump(response, json_file)
     '''
 
-# AWS S3 Connection and store
+# AWS S3 Connection
 s3 = boto3.client('s3', aws_access_key_id=credentials['aws']['key'], aws_secret_access_key=credentials['aws']['secret'])
 
 with open('coin_qoutes.json', 'rb') as json_file:
     s3.upload_fileobj(json_file, 'coinmarketcap-data', f'{dt_string}/coin_qoutes.json')
 
-# AWS RDS Postgres store
+# AWS RDS Postgres
 db_user = credentials['db']['user']
 db_pass = credentials['db']['password']
 db_host = credentials['db']['host']
@@ -63,7 +63,7 @@ db_database = credentials['db']['database']
 engine = db.create_engine(f'postgresql+psycopg2://{db_user}:{db_pass}@{db_host}/{db_database}')
 
 
-# Build Dataframe Statment for SQL Insert
+# Build Dataframe Statement for SQL Insert
 def build_stmt(response):
 
     df_coins = pd.DataFrame()
