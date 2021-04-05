@@ -42,7 +42,7 @@ r = requests.get(url, headers=headers, params=params)
 response = r.json()
 
 
-#Store local
+# Store local
 '''
 with open('coin_qoutes.json', 'w') as json_file:
     json.dump(response, json_file)
